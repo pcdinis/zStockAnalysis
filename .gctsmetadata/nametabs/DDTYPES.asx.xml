@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?><asx:abap xmlns:asx="http://www.sap.com/abapxml">
+<asx:values>
+<NAMETAB>
+<NAMETAB>
+<NAME>TYPENAME</NAME>
+<KEY>X</KEY>
+<TYPE>C</TYPE>
+<LENGTH>000030</LENGTH>
+<DECIMALS>-1</DECIMALS>
+</NAMETAB>
+<NAMETAB>
+<NAME>STATE</NAME>
+<KEY></KEY>
+<TYPE>C</TYPE>
+<LENGTH>000001</LENGTH>
+<DECIMALS>-1</DECIMALS>
+</NAMETAB>
+<NAMETAB>
+<NAME>TYPEKIND</NAME>
+<KEY></KEY>
+<TYPE>C</TYPE>
+<LENGTH>000004</LENGTH>
+<DECIMALS>-1</DECIMALS>
+</NAMETAB>
+</NAMETAB>
+</asx:values>
+</asx:abap>
