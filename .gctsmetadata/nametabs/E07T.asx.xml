@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?><asx:abap xmlns:asx="http://www.sap.com/abapxml">
+<asx:values>
+<NAMETAB>
+<NAMETAB>
+<NAME>TRKORR</NAME>
+<KEY>X</KEY>
+<TYPE>C</TYPE>
+<LENGTH>000020</LENGTH>
+<DECIMALS>-1</DECIMALS>
+</NAMETAB>
+<NAMETAB>
+<NAME>LANGU</NAME>
+<KEY>X</KEY>
+<TYPE>C</TYPE>
+<LENGTH>000001</LENGTH>
+<DECIMALS>-1</DECIMALS>
+</NAMETAB>
+<NAMETAB>
+<NAME>AS4TEXT</NAME>
+<KEY></KEY>
+<TYPE>C</TYPE>
+<LENGTH>000060</LENGTH>
+<DECIMALS>-1</DECIMALS>
+</NAMETAB>
+</NAMETAB>
+</asx:values>
+</asx:abap>
