@@ -27,7 +27,8 @@
         MOVE-CORRESPONDING <fs_stock_transactions> TO ls_buy_movemts.
 *       Update QUANTITY BALANCE!!!
         MOVE ls_buy_movemts-quantity TO ls_buy_movemts-quantity_balance.
-        ls_buy_movemts-total_price = ls_buy_movemts-total_price * ( -1 ).
+        ls_buy_movemts-price = ls_buy_movemts-price * ( -1 ).
+        "ls_buy_movemts-total_price = ls_buy_movemts-total_price * ( -1 ).
         APPEND ls_buy_movemts TO lt_buy_movemts.
       ENDIF.
     ENDLOOP.
@@ -54,6 +55,7 @@
         CLEAR lv_unit_buy_value.
         CLEAR lv_unit_sell_value.
 *       Get common data!!
+        ls_res_movemts-trmonth = <fs_sell_movemts>-trdate+4(2).
         ls_res_movemts-tryear  = <fs_sell_movemts>-trdate(4).
         ls_res_movemts-trhour  = <fs_sell_movemts>-trhour.
         ls_res_movemts-isin    = <fs_sell_movemts>-isin.
@@ -65,15 +67,19 @@
 
           ls_res_movemts-sell_quantity   = <fs_buy_movemts>-quantity_balance.
 *         Get unit value from the SELLING movement
-          lv_unit_sell_value             = <fs_sell_movemts>-total_price / <fs_sell_movemts>-quantity.
+          "lv_unit_sell_value             = <fs_sell_movemts>-total_price / <fs_sell_movemts>-quantity.
+          lv_unit_sell_value             = <fs_sell_movemts>-price / <fs_sell_movemts>-quantity.
           ls_res_movemts-sell_value      = lv_unit_sell_value * <fs_buy_movemts>-quantity_balance.
-          ls_res_movemts-sell_curr       = <fs_sell_movemts>-total_curr.
+          "ls_res_movemts-sell_curr       = <fs_sell_movemts>-total_curr.
+          ls_res_movemts-sell_curr       = <fs_sell_movemts>-curr.
 
           ls_res_movemts-buy_quantity    = <fs_buy_movemts>-quantity_balance.
 *         Get unit value from the BUYING movement
-          lv_unit_buy_value              = <fs_buy_movemts>-total_price / <fs_buy_movemts>-quantity.
+          "lv_unit_buy_value              = <fs_buy_movemts>-total_price / <fs_buy_movemts>-quantity.
+          lv_unit_buy_value              = <fs_buy_movemts>-price / <fs_buy_movemts>-quantity.
           ls_res_movemts-buy_value       = lv_unit_buy_value * <fs_buy_movemts>-quantity_balance.
-          ls_res_movemts-buy_curr        = <fs_buy_movemts>-total_curr.
+          "ls_res_movemts-buy_curr        = <fs_buy_movemts>-total_curr.
+          ls_res_movemts-buy_curr        = <fs_buy_movemts>-curr.
 
 *         Remove BUY QUANTITY BALANCE from SELL row
           SUBTRACT <fs_buy_movemts>-quantity_balance FROM <fs_sell_movemts>-quantity_balance.
@@ -84,15 +90,19 @@
 
           ls_res_movemts-sell_quantity   = <fs_sell_movemts>-quantity_balance.
 *         Get unit value from the SELLING movement
-          lv_unit_sell_value             = <fs_sell_movemts>-total_price / <fs_sell_movemts>-quantity.
+          "lv_unit_sell_value             = <fs_sell_movemts>-total_price / <fs_sell_movemts>-quantity.
+          lv_unit_sell_value             = <fs_sell_movemts>-price / <fs_sell_movemts>-quantity.
           ls_res_movemts-sell_value      = lv_unit_sell_value * <fs_sell_movemts>-quantity_balance.
-          ls_res_movemts-sell_curr       = <fs_sell_movemts>-total_curr.
+          "ls_res_movemts-sell_curr       = <fs_sell_movemts>-total_curr.
+          ls_res_movemts-sell_curr       = <fs_sell_movemts>-curr.
 
           ls_res_movemts-buy_quantity    = <fs_sell_movemts>-quantity_balance.
 *         Get unit value from the BUYING movement
-          lv_unit_buy_value              = <fs_buy_movemts>-total_price / <fs_buy_movemts>-quantity.
+          "lv_unit_buy_value              = <fs_buy_movemts>-total_price / <fs_buy_movemts>-quantity.
+          lv_unit_buy_value              = <fs_buy_movemts>-price / <fs_buy_movemts>-quantity.
           ls_res_movemts-buy_value       = lv_unit_buy_value * <fs_sell_movemts>-quantity_balance. "<fs_buy_movemts>-total_price.
-          ls_res_movemts-buy_curr        = <fs_buy_movemts>-total_curr.
+          "ls_res_movemts-buy_curr        = <fs_buy_movemts>-total_curr.
+          ls_res_movemts-buy_curr        = <fs_buy_movemts>-curr.
 
 *         Remove SELL quantity balance from BUYING movement
           SUBTRACT <fs_sell_movemts>-quantity_balance FROM <fs_buy_movemts>-quantity_balance.
@@ -105,7 +115,8 @@
         ls_res_movemts-cap_gains_curr  = <fs_buy_movemts>-total_curr.
 
         ls_res_movemts-tax_value = ls_res_movemts-cap_gains_value * 28 / 100.
-        ls_res_movemts-tax_curr  = <fs_buy_movemts>-total_curr.
+        "ls_res_movemts-tax_curr  = <fs_buy_movemts>-total_curr.
+        ls_res_movemts-tax_curr  = <fs_buy_movemts>-curr.
         APPEND ls_res_movemts TO et_stock_tax_data.
       ENDLOOP.
     ENDLOOP.
