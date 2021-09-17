@@ -12,4 +12,4 @@ Solution developed in my spare time to do some basic stock analysis.
 
 The first solution help me analyze how much will I pay regarding taxes.
 
-(this is a never ending project)
+(continue...)
